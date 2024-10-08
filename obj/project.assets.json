@@ -2579,11 +2579,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\MINIMAL API\\MINIMAL API.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\Projeto - Minimal API\\MINIMAL API - Endpoints\\MINIMAL-API-DOTNET\\MINIMAL API.csproj",
       "projectName": "MINIMAL API",
-      "projectPath": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\MINIMAL API\\MINIMAL API.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\Projeto - Minimal API\\MINIMAL API - Endpoints\\MINIMAL-API-DOTNET\\MINIMAL API.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\MINIMAL API\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\vscode\\PROJETOS GITHUB\\Projeto - Minimal API\\MINIMAL API - Endpoints\\MINIMAL-API-DOTNET\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

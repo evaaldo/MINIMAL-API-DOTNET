@@ -11,4 +11,8 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
+app.MapGet("/rangos", () => {
+    return "It's working!";
+});
+
 app.Run();
