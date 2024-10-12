@@ -122,3 +122,5 @@ C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API -
 C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API - Endpoints\MINIMAL-API-DOTNET\obj\Debug\net8.0\MINIMAL API.pdb
 C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API - Endpoints\MINIMAL-API-DOTNET\obj\Debug\net8.0\MINIMAL API.genruntimeconfig.cache
 C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API - Endpoints\MINIMAL-API-DOTNET\obj\Debug\net8.0\ref\MINIMAL API.dll
+C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API - Endpoints\MINIMAL-API-DOTNET\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\Desktop\vscode\PROJETOS GITHUB\Projeto - Minimal API\MINIMAL API - Endpoints\MINIMAL-API-DOTNET\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
