@@ -10,6 +10,8 @@ builder.Services.AddDbContext<RangoDbContext>(
     o => o.UseSqlite(builder.Configuration.GetConnectionString("RangoDbConStr"))
 );
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 app.MapGet("/", () => {
