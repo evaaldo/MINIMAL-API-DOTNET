@@ -51,6 +51,72 @@ app.MapGet("/rango/{id:int}", async (
         IMapper mapper
     ) => {
     return mapper.Map<RangoDTO>(await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == id));
+}).WithName("GetRango");
+
+app.MapPost("/rango", async Task<CreatedAtRoute<RangoDTO>>
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        [FromBody] RangoParaCriacaoDTO rangoParaCriacaoDTO
+        // LinkGenerator linkGenerator,
+        // HttpContext httpContext
+    ) =>
+{
+    var rangoEntity = mapper.Map<Rango>(rangoParaCriacaoDTO);
+    rangoDbContext.Add(rangoEntity);
+    await rangoDbContext.SaveChangesAsync();
+
+    var rangoToReturn = mapper.Map<RangoDTO>(rangoEntity);
+
+    return TypedResults.CreatedAtRoute(rangoToReturn, "GetRango", new { id = rangoToReturn.Id });
+
+    // Referência para alunos
+    // var linkToReturn = linkGenerator.GetUriByName(
+    //     httpContext,
+    //     "GetRango",
+    //     new { id = rangoToReturn.Id }
+    // );
+
+    // return TypedResults.Created(linkToReturn, rangoToReturn);
 });
+
+app.MapPut("/rango/{id:int}", async Task<Results<NotFound,Ok>>
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        int id,
+        [FromBody] RangoParaAtualizacaoDTO rangoParaAtualizacaoDTO
+    ) =>
+    {
+        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == id);
+        if(rangosEntity == null)
+            return TypedResults.NotFound();
+        
+        mapper.Map(rangoParaAtualizacaoDTO, rangosEntity);
+
+        await rangoDbContext.SaveChangesAsync();
+
+        return TypedResults.Ok();
+    }
+);
+
+app.MapDelete("/rango/{id:int}", async Task<Results<NotFound,NoContent>>
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        int id
+    ) =>
+    {
+        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == id);
+        if(rangosEntity == null)
+            return TypedResults.NotFound();
+
+        rangoDbContext.Rangos.Remove(rangosEntity);
+
+        await rangoDbContext.SaveChangesAsync();
+
+        return TypedResults.NoContent();
+    }
+);
 
 app.Run();
