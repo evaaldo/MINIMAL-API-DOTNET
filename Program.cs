@@ -27,15 +27,7 @@ var ingredientesEndpoints = rangosComIdEndpoint.MapGroup("/ingredientes");
 
 rangosEndpoint.MapGet("", RangosHandlers.GetRangosAsync);
 
-ingredientesEndpoints.MapGet("", async (
-        RangoDbContext rangoDbContext,
-        int rangoId,
-        IMapper mapper
-    ) => {
-    return mapper.Map<IEnumerable<IngredienteDTO>>((await rangoDbContext.Rangos
-                               .Include(rango => rango.Ingredientes)
-                               .FirstOrDefaultAsync(rango => rango.Id == rangoId))?.Ingredientes);
-});
+ingredientesEndpoints.MapGet("", IngredientesHandlers.GetIngredientesDoRango);
 
 rangosComIdEndpoint.MapGet("", async (
         RangoDbContext rangoDbContext,
