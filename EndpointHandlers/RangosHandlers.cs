@@ -29,4 +29,16 @@ public static class RangosHandlers
         else
             return TypedResults.Ok(mapper.Map<IEnumerable<RangoDTO>>(rangosEntity));
     }
+
+    public static async Task<Ok<RangoDTO>> GetRangosComIdAsync
+    (
+        RangoDbContext rangoDbContext,
+        int rangoId,
+        IMapper mapper
+    )
+    {
+        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
+
+        return TypedResults.Ok(mapper.Map<RangoDTO>(rangosEntity));
+    }
 }

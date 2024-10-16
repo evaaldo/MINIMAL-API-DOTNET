@@ -29,13 +29,7 @@ rangosEndpoint.MapGet("", RangosHandlers.GetRangosAsync);
 
 ingredientesEndpoints.MapGet("", IngredientesHandlers.GetIngredientesDoRango);
 
-rangosComIdEndpoint.MapGet("", async (
-        RangoDbContext rangoDbContext,
-        int rangoId,
-        IMapper mapper
-    ) => {
-    return mapper.Map<RangoDTO>(await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId));
-}).WithName("GetRangos");
+rangosComIdEndpoint.MapGet("", RangosHandlers.GetRangosComIdAsync).WithName("GetRangos");
 
 rangosEndpoint.MapPost("", async Task<CreatedAtRoute<RangoDTO>>
     (
