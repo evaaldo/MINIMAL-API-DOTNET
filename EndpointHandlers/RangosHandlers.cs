@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MINIMAL_API.Domains;
 using RangoAgil.API.DbContexts;
+using RangoAgil.API.Entities;
 
 namespace MINIMAL_API.EndpointHandlers;
 
@@ -40,5 +41,25 @@ public static class RangosHandlers
         var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
 
         return TypedResults.Ok(mapper.Map<RangoDTO>(rangosEntity));
+    }
+
+    public static async Task<CreatedAtRoute<RangoDTO>> PostRangoAsync
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        [FromBody] RangoParaCriacaoDTO rangoParaCriacaoDTO
+    )
+    {
+        var rangoEntity = mapper.Map<Rango>(rangoParaCriacaoDTO);
+        rangoDbContext.Add(rangoEntity);
+        await rangoDbContext.SaveChangesAsync();
+
+        var rangoToReturn = mapper.Map<RangoDTO>(rangoEntity);
+
+        return TypedResults.CreatedAtRoute(
+            rangoToReturn,
+            "GetRangos",
+            new { rangoId = rangoToReturn.Id }
+        );
     }
 }

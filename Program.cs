@@ -31,36 +31,7 @@ ingredientesEndpoints.MapGet("", IngredientesHandlers.GetIngredientesDoRango);
 
 rangosComIdEndpoint.MapGet("", RangosHandlers.GetRangosComIdAsync).WithName("GetRangos");
 
-rangosEndpoint.MapPost("", async Task<CreatedAtRoute<RangoDTO>>
-    (
-        RangoDbContext rangoDbContext,
-        IMapper mapper,
-        [FromBody] RangoParaCriacaoDTO rangoParaCriacaoDTO
-        // LinkGenerator linkGenerator,
-        // HttpContext httpContext
-    ) =>
-{
-    var rangoEntity = mapper.Map<Rango>(rangoParaCriacaoDTO);
-    rangoDbContext.Add(rangoEntity);
-    await rangoDbContext.SaveChangesAsync();
-
-    var rangoToReturn = mapper.Map<RangoDTO>(rangoEntity);
-
-    return TypedResults.CreatedAtRoute(
-        rangoToReturn,
-        "GetRangos",
-        new { rangoId = rangoToReturn.Id }
-    );
-
-    // Referência para alunos
-    // var linkToReturn = linkGenerator.GetUriByName(
-    //     httpContext,
-    //     "GetRango",
-    //     new { id = rangoToReturn.Id }
-    // );
-
-    // return TypedResults.Created(linkToReturn, rangoToReturn);
-});
+rangosEndpoint.MapPost("", RangosHandlers.PostRangoAsync);
 
 rangosComIdEndpoint.MapPut("", async Task<Results<NotFound,Ok>>
     (
