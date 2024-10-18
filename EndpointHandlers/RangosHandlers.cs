@@ -62,4 +62,43 @@ public static class RangosHandlers
             new { rangoId = rangoToReturn.Id }
         );
     }
+
+    public static async Task<Results<NotFound,Ok>> PutRangoComIdAsync
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        int rangoId,
+        [FromBody] RangoParaAtualizacaoDTO rangoParaAtualizacaoDTO
+    )
+    {
+        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
+
+        if(rangosEntity == null)
+            return TypedResults.NotFound();
+        
+        mapper.Map(rangoParaAtualizacaoDTO, rangosEntity);
+
+        await rangoDbContext.SaveChangesAsync();
+
+        return TypedResults.Ok();
+    }
+
+    public static async Task<Results<NotFound,NoContent>> DeleteRangoComIdAsync
+    (
+        RangoDbContext rangoDbContext,
+        IMapper mapper,
+        int rangoId
+    )
+    {
+        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
+        
+        if(rangosEntity == null)
+            return TypedResults.NotFound();
+
+        rangoDbContext.Rangos.Remove(rangosEntity);
+
+        await rangoDbContext.SaveChangesAsync();
+
+        return TypedResults.NoContent();
+    }
 }

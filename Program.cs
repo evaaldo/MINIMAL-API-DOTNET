@@ -33,43 +33,8 @@ rangosComIdEndpoint.MapGet("", RangosHandlers.GetRangosComIdAsync).WithName("Get
 
 rangosEndpoint.MapPost("", RangosHandlers.PostRangoAsync);
 
-rangosComIdEndpoint.MapPut("", async Task<Results<NotFound,Ok>>
-    (
-        RangoDbContext rangoDbContext,
-        IMapper mapper,
-        int rangoId,
-        [FromBody] RangoParaAtualizacaoDTO rangoParaAtualizacaoDTO
-    ) =>
-    {
-        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
-        if(rangosEntity == null)
-            return TypedResults.NotFound();
-        
-        mapper.Map(rangoParaAtualizacaoDTO, rangosEntity);
+rangosComIdEndpoint.MapPut("", RangosHandlers.PutRangoComIdAsync);
 
-        await rangoDbContext.SaveChangesAsync();
-
-        return TypedResults.Ok();
-    }
-);
-
-rangosComIdEndpoint.MapDelete("", async Task<Results<NotFound,NoContent>>
-    (
-        RangoDbContext rangoDbContext,
-        IMapper mapper,
-        int rangoId
-    ) =>
-    {
-        var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
-        if(rangosEntity == null)
-            return TypedResults.NotFound();
-
-        rangoDbContext.Rangos.Remove(rangosEntity);
-
-        await rangoDbContext.SaveChangesAsync();
-
-        return TypedResults.NoContent();
-    }
-);
+rangosComIdEndpoint.MapDelete("", RangosHandlers.DeleteRangoComIdAsync);
 
 app.Run();
