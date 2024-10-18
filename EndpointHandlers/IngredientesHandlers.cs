@@ -11,7 +11,7 @@ namespace MINIMAL_API.EndpointHandlers;
 
 public class IngredientesHandlers
 {
-    public static async Task<Results<NoContent, Ok<IEnumerable<IngredienteDTO>>>> GetIngredientesDoRango
+    public static async Task<Results<NoContent, Ok<IEnumerable<IngredienteDTO>>>> GetIngredientesAsync
     (
         RangoDbContext rangoDbContext,
         int rangoId,

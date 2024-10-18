@@ -14,7 +14,7 @@ namespace MINIMAL_API.EndpointHandlers;
 
 public static class RangosHandlers
 {
-    public static async Task<Results<NoContent, Ok<IEnumerable<RangoDTO>>>> GetRangosAsync
+    public static async Task<Results<NoContent, Ok<IEnumerable<RangoDTO>>>> GetRangoAsync
     (
         RangoDbContext rangoDbContext,
         [FromQuery(Name = "name")] string? rangoNome,
@@ -91,7 +91,7 @@ public static class RangosHandlers
     )
     {
         var rangosEntity = await rangoDbContext.Rangos.FirstOrDefaultAsync(x => x.Id == rangoId);
-        
+
         if(rangosEntity == null)
             return TypedResults.NotFound();
 
