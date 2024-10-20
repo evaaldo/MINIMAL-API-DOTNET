@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RangoAgil.API.DbContexts;
-using RangoAgil.API.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using MINIMAL_API.Domains; // Certifique-se de incluir isso
 
