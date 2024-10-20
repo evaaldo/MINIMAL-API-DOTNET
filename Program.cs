@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 using MINIMAL_API.Extensions;
 using RangoAgil.API.DbContexts;
@@ -10,7 +11,14 @@ builder.Services.AddDbContext<RangoDbContext>(
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+if(!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler();
+}
 
 app.RegisterRangosEndpoints();
 app.RegisterIngredientesEndpoints();
